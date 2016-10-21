@@ -33,7 +33,7 @@ contains the definition of the only component we will use.
 
 
 	<?xml version="1.0"?>
-		<component type="abstract" name="test"
+	<component type="abstract" name="test"
         	description="This component sums two double and stores the result in res">
     	<params>
         	<param name="res" type="real" mode="out" />
@@ -54,16 +54,16 @@ $> yml_component abstract/test.query
 
 The file impl/test_impl.query contains the following :
 
-<?xml version="1.0" ?>
-<component name="test_impl" abstract="test" type="impl">
-    <impl lang="CXX" libs="">
-        <header></header>
-        <source>
-            res = a1 + a2;
-        </source>
-        <footer></footer>
-    </impl>
-</component>
+	<?xml version="1.0" ?>
+	<component name="test_impl" abstract="test" type="impl">
+	    <impl lang="CXX" libs="">
+	        <header></header>
+	        <source>
+	            res = a1 + a2;
+	        </source>
+	        <footer></footer>
+	    </impl>
+	</component>
 
 An implementation component is used to describe the computation
 executed remotely. It's compiled in a static binary application
@@ -97,15 +97,15 @@ describe the graph to be executed. In this example we will make two
 sequential sum. The application is described in the file
 apps/test1.query.
 
-  <application name="test1">
-    <description>A starter example of an YML application</description>
-    <params>
-    </params>
-    <graph>
-        compute test(result, 1.0, 2.0);       # result contains 3.0
-        compute test(result, result, result); # result contains 6.0
-    </graph>
- </application>
+	<application name="test1">
+	    <description>A starter example of an YML application</description>
+	    <params>
+	    </params>
+	    <graph>
+	        compute test(result, 1.0, 2.0);       # result contains 3.0
+	        compute test(result, result, result); # result contains 6.0
+	    </graph>
+	</application>
 
 one can compile this application using
 
@@ -154,20 +154,20 @@ parameters.
 
 In order to illustrate this tool we will update our application
 definition a little in order to add parameters.
-  <application name="test2">
-    <description>
-A starter example of an YML application with parameter
-    </description>
-    <params>
-        <param name="v1" type="real" mode="in" />
-        <param name="v2" type="real" mode="in" />
-        <param name="result" type="real" mode="out" />
-    </params>
-    <graph>
-        compute test(result, v1, v2);
-        compute test(result, result, result);
-    </grap>
- </application>
+	<application name="test2">
+	    <description>
+	A starter example of an YML application with parameter
+	    </description>
+	    <params>
+	        <param name="v1" type="real" mode="in" />
+	        <param name="v2" type="real" mode="in" />
+	        <param name="result" type="real" mode="out" />
+	    </params>
+	    <graph>
+	        compute test(result, v1, v2);
+	        compute test(result, result, result);
+	    </grap>
+	</application>
 
 This application now takes 2 input parameters v1 and v2 both reals. It
 create a real as a result called result. Let's compile this application
@@ -341,48 +341,48 @@ blockCount = 4 blocks.
 
 - DSortGenerator.query
 
-<?xml version="1.0"?>
-<component type="abstract" name="DSortGenerator" description="Create a block of random integer" >
-    <params>
-        <param name="block" type="VectorInteger" mode="out" />
-        <param name="size"  type="integer" mode="in" />
-        <param name="max"   type="real" mode="in" />
-    </params>
-</component>
+	<?xml version="1.0"?>
+	<component type="abstract" name="DSortGenerator" description="Create a block of random integer" >
+	    <params>
+	        <param name="block" type="VectorInteger" mode="out" />
+	        <param name="size"  type="integer" mode="in" />
+	        <param name="max"   type="real" mode="in" />
+	    </params>
+	</component>
 
 - DSortSort.query
 
-<?xml version="1.0" ?>
-<component name="DSortSort" type="abstract" description="Sort a single block">
-    <params>
-        <param name="block" type="VectorInteger" mode="inout" />
-    </params>
-</component>
+	<?xml version="1.0" ?>
+	<component name="DSortSort" type="abstract" description="Sort a single block">
+	    <params>
+	        <param name="block" type="VectorInteger" mode="inout" />
+	    </params>
+	</component>
 
 
 - DSortMerge.query
 
-<?xml version="1.0" ?>
-<component name="DSortSort" type="abstract" description="Sort a single block">
-    <params>
-        <param name="block" type="VectorInteger" mode="inout" />
-    </params>
-</component>
+	<?xml version="1.0" ?>
+	<component name="DSortSort" type="abstract" description="Sort a single block">
+	    <params>
+	        <param name="block" type="VectorInteger" mode="inout" />
+	    </params>
+	</component>
 
 
 - DSortMerge.query
 
-<?xml version="1.0"?>
-<component name="DSortMerge" type="abstract" description="Sort two sorted block
-and store all values in two block all value in b1Out are lower or equal to
-the ones in b2Out" >
-    <params>
-        <param name="b1Out" type="VectorInteger" mode="out" />
-        <param name="b2Out" type="VectorInteger" mode="out" />
-        <param name="b1In" type="VectorInteger" mode="in" />
-        <param name="b2In" type="VectorInteger" mode="in" />
-    </params>
-</component>
+	<?xml version="1.0"?>
+	<component name="DSortMerge" type="abstract" description="Sort two sorted block
+	and store all values in two block all value in b1Out are lower or equal to
+	the ones in b2Out" >
+	    <params>
+	        <param name="b1Out" type="VectorInteger" mode="out" />
+	        <param name="b2Out" type="VectorInteger" mode="out" />
+	        <param name="b1In" type="VectorInteger" mode="in" />
+	        <param name="b2In" type="VectorInteger" mode="in" />
+	    </params>
+	</component>
 
 3.2./ Implementation components
 
