@@ -154,19 +154,20 @@ parameters.
 
 In order to illustrate this tool we will update our application
 definition a little in order to add parameters.
+	
 	<application name="test2">
-	    <description>
-	A starter example of an YML application with parameter
-	    </description>
-	    <params>
-	        <param name="v1" type="real" mode="in" />
-	        <param name="v2" type="real" mode="in" />
-	        <param name="result" type="real" mode="out" />
-	    </params>
-	    <graph>
-	        compute test(result, v1, v2);
-	        compute test(result, result, result);
-	    </grap>
+		    <description>
+		A starter example of an YML application with parameter
+		    </description>
+		    <params>
+		        <param name="v1" type="real" mode="in" />
+		        <param name="v2" type="real" mode="in" />
+		        <param name="result" type="real" mode="out" />
+		    </params>
+		    <graph>
+		        compute test(result, v1, v2);
+		        compute test(result, result, result);
+		    </grap>
 	</application>
 
 This application now takes 2 input parameters v1 and v2 both reals. It
