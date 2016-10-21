@@ -1,5 +1,5 @@
 ![YML logo](YML_logo.png)
-# Yml Specification
+# YML Specification
 
 YML is a research project that aims at providing tools for using global computing middleware such as GRID, Peer to Peer and metacomputing environment. YML software architecture enables the definition of parallel application independently of the underlying middleware used. Parallel applications are defined using a workflow language called YvetteML. You can find more information in [YML offical site](http://yml.prism.uvsq.fr/index.php?lang=fr&page=0).
 
