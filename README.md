@@ -32,15 +32,15 @@ component. The query bellow stored in a file named abstract/test.query
 contains the definition of the only component we will use.
 
 
-  <?xml version="1.0"?>
-  <component type="abstract" name="test"
-         description="This component sums two double and stores the result in res">
-     <params>
-        <param name="res" type="real" mode="out" />
-        <param name="a1"  type="real" mode="in" />
-        <param name="a2"  type="real" mode="in" />
-      </params>
-  </component>
+	<?xml version="1.0"?>
+		<component type="abstract" name="test"
+        	description="This component sums two double and stores the result in res">
+    	<params>
+        	<param name="res" type="real" mode="out" />
+        	<param name="a1"  type="real" mode="in" />
+        	<param name="a2"  type="real" mode="in" />
+    	</params>
+	</component>
 
 To register an abstract component, one have to use
 yml_component. using the following command (TODO):
