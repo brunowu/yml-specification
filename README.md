@@ -240,7 +240,7 @@ This is a nice example of parallelism express using YML to represent a set
 of parallel loop with explicit synchronisation. It is extracted from the PhD
  Thesis of Olivier Delannoy (p.88)
 
-1./ Overview of the algorithm
+1. Overview of the algorithm
 
 This application presents a distributed sorting of a large dataset. The
 dataset is composed of integers stored in blocks of a fixed size. The
@@ -266,7 +266,7 @@ for iter in 1, blockCount − 1 do
         max ← max(block1, block2)
         DSortMerge (INPUTS: a_min , a_max OUTPUTS: a_min , a_max )
 
-2./ Conception of the application
+2. Conception of the application
 
 Parameters and services needed for the application are listed.
 
@@ -336,11 +336,12 @@ blockCount = 4 blocks.
                                  |<Stop>|
                                  --------
 
-3./ Implementation in YML
+3. Implementation in YML
 
-3.1./ Abstract components
+3.1. Abstract components
 
 - DSortGenerator.query
+
 
 	<?xml version="1.0"?>
 	<component type="abstract" name="DSortGenerator" description="Create a block of random integer" >
@@ -350,6 +351,7 @@ blockCount = 4 blocks.
 		    <param name="max"   type="real" mode="in" />
 		</params>
 	</component>
+
 
 - DSortSort.query
 
@@ -385,7 +387,7 @@ blockCount = 4 blocks.
 	    </params>
 	</component>
 
-3.2./ Implementation components
+3.2. Implementation components
 
 See implementation of each component in ./impl
 
@@ -395,7 +397,7 @@ See implementation of each component in ./impl
 
 - DSortMerge_impl.query
 
-3.3./ Graph
+3.3. Graph
 
 ####TODO
 
@@ -406,7 +408,7 @@ considering algorithm 1 and Figure 1.
 
 - Implementation of Algorithm 1 (Complete the file execution.query)
 
-4./ Compilation and execution
+4. Compilation and execution
 
 Remark:
 Here we use the type vector for integers. YML need a definition of this type.
