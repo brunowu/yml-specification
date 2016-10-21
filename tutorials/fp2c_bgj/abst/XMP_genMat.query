@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<component type="abstract" name="XMP_genMat">
+<params>
+<param name="m" type="Matrix" mode="out" />
+<param name="iseed" type="integer" mode="in" />
+<param name="jseed" type="integer" mode="in" />
+</params>
+</component>
+

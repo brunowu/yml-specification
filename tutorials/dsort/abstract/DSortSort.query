@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<component name="DSortSort" type="abstract" description="Sort a single block">
+    <params>
+        <param name="block" type="VectorInteger" mode="inout" /> 
+    </params>
+</component>

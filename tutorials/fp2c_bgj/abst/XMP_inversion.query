@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="abstract" name="XMP_inversion">
+<params>
+<param name="matInput" type="Matrix" mode="in" />
+<param name="matInv"   type="Matrix" mode="out" />
+</params>
+</component>

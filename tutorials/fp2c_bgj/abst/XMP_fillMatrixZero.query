@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<component type="abstract" name="XMP_fillMatrixZero">
+<params>
+  <param name="m" type="Matrix" mode="out" />
+</params>
+</component>
+

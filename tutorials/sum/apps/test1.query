@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<application name="test1" >
+    <description>
+        First tutorial example application
+    </description>
+    <params>
+    </params>
+    <graph>
+        compute test(result, 1.0, 2.0);         # result contains 3.0
+        compute test(result, result, result);   # result contains 6.0 
+         
+    </graph>
+</application>
+

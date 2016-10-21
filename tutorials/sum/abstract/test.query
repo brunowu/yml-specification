@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<component name="test" type="abstract" description="Test component">
+    <params>
+        <param name="res" type="real" mode="out" />
+        <param name="a1"  type="real" mode="in" />
+        <param name="a2"  type="real" mode="in" />
+    </params>
+</component>

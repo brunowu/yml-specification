@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<component name="test_impl" abstract="test" type="impl">
+    <impl lang="CXX" libs="">
+        <header></header>
+        <source>
+            res = a1 + a2;
+        </source>
+        <footer></footer> 
+    </impl>
+</component>
+
