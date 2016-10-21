@@ -255,16 +255,16 @@ algorithm 1.
 INPUTS: {a_1 , a_2 , . . . , a_n } N unsorted blocks of K integer values.
 OUTPUTS: {a_1 , a_2 , . . . , a_n } N sorted blocks of K integer values.
 
-for i in 1, blockCount in parallel do
-    DSortBlock (INPUTS: ai OUTPUTS: ai )
-for iter in 1, blockCount − 1 do
-    inc ← 1 + iter mod 2
-    for i in 0, blockCount/2 − 1 in parallel do
-        block1 ← 1 + (inc + 2 ∗ i) mod N
-        block2 ← 1 + (inc + 2 ∗ i + 1) mod N
-        min ← min(block1, block2)
-        max ← max(block1, block2)
-        DSortMerge (INPUTS: a_min , a_max OUTPUTS: a_min , a_max )
+	for i in 1, blockCount in parallel do
+	    DSortBlock (INPUTS: ai OUTPUTS: ai )
+	for iter in 1, blockCount − 1 do
+	    inc ← 1 + iter mod 2
+	    for i in 0, blockCount/2 − 1 in parallel do
+	        block1 ← 1 + (inc + 2 ∗ i) mod N
+	        block2 ← 1 + (inc + 2 ∗ i + 1) mod N
+	        min ← min(block1, block2)
+	        max ← max(block1, block2)
+	        DSortMerge (INPUTS: a_min , a_max OUTPUTS: a_min , a_max )
 
 2./ Conception of the application
 
