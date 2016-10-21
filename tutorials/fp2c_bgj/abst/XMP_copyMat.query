@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<component type="abstract" name="XMP_copyMat"> 	
+<params>
+<param name="A1" type="Matrix" mode="in" />
+<param name="B1" type="Matrix" mode="out" />
+</params>
+</component>
+

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<component type="impl" name="XMP_disp" abstract="XMP_disp">
+<impl lang="XMP" nodes="CPU:(2,2)">
+  <templates>
+    <template name="t" format="block,block" size="64,64"/>
+  </templates>
+  <distribute>
+    <param template="t" name="A(64,64)" align="[i][j]:(j,i)"/>
+  </distribute>     
+<header>
+<![CDATA[
+#include<mpi.h>
+double B[64][64];
+]]>
+</header>
+<source>
+<![CDATA[
+  int    myrank, nprocs;
+  int    i, j, n;
+  
+  n = 64;
+  for(i=0;i<n;i++){
+    for(j=0;j<n;j++){
+      B[i][j]=0;
+    }
+  }
+#pragma xmp loop (j,i) on t(j,i)
+  for(i=0;i<n;i++){
+    for(j=0;j<n;j++){
+      B[i][j]=A[i][j]; 
+    }
+  }
+#pragma xmp reduction(+:B)
+
+  MPI_Comm_rank(MPI_COMM_WORLD,&myrank);
+  if(myrank==0){
+    for(i=0;i<n;i++){
+      for(j=0;j<n;j++){
+       printf("%f ",B[i][j]);
+      }
+      printf("\n");
+    }
+  }
+
+
+]]>
+</source>
+<footer />
+</impl>
+</component>
+

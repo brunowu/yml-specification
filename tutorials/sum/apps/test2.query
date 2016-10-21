@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<application name="test2" >
+    <description>
+        First tutorial example application
+    </description>
+    <params>
+      <param name="v1" type="real" mode="in" />
+      <param name="v2" type="real" mode="in" />
+      <param name="result" type="real" mode="out" />
+    </params>
+    <graph>
+        compute test(result, v1, v2);         
+        compute test(result, result, result);           
+    </graph>
+</application>
+

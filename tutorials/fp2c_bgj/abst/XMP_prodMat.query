@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<component type="abstract" name="XMP_prodMat"> 
+<params>
+<param name="B0" type="Matrix" mode="in" />
+<param name="A0" type="Matrix" mode="inout" />
+</params>
+</component>
+

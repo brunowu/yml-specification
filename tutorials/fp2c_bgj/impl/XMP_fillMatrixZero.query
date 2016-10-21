@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<component type="impl" name="XMP_fillMatrixZero" abstract="XMP_fillMatrixZero">
+<impl lang="XMP" nodes="CPU:(2,2)">
+  <templates>
+    <template name="t" format="block,block" size="64,64"/>
+  </templates>
+  <distribute>
+    <param template="t" name="m(64,64)" align="[i][j]:(j,i)"/>
+  </distribute>
+<header>
+<![CDATA[
+]]>
+</header>
+<source>
+<![CDATA[
+  int i, j, n;
+
+  n = 64;
+#pragma xmp loop (j,i) on t(j,i) 
+  for (i=0; i<n; i++){
+    for (j=0 ; j<n; j++){
+      m[i][j]=0.0;
+    }
+  }
+]]>
+</source>
+<footer />
+</impl>
+</component>
+

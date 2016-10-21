@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<application name="DSORT" >
+    <description>
+        This graph is used to show the sorting process at runtime and keep an history of blocks. 
+        It takes a huge space on disc for large block. Use it with care 
+
+    </description>
+<params>
+    <param name="blockSize" type="integer" mode="in" description="Set the size pf blocks" />
+</params>
+<graph>
+# Change this var to a power of two 
+# It corresponds to the number of blocks of data to handle
+# The graph will be made of blockCount - 1 parallel front of 
+# n / 2 block operations 
+blockCount := 32;
+par 
+  par (i := 1; blockCount) 
+  do 
+    compute DSortGenerator(block[i][0], blockSize, 256.0);
+    compute DSortSort(block[i][0]);
+    notify(evtBlock[i][0]);
+  enddo
+//
+  par (i := 1; blockCount - 1) 
+  do 
+    inc := 1 + (i % 2); 
+    par (j := 0 ; blockCount / 2 - 1) 
+    do 
+      block1 := ( inc + 2*j ) % blockCount;
+      block2 := ( inc + 2*j + 1 ) %  blockCount;
+      if (block1 gt block2)
+      then 
+        finalBlock1 := 1 + block2;
+        finalBlock2 := 1 + block1;
+      else
+        finalBlock1 := 1 + block1;
+        finalBlock2 := 1 + block2;
+      endif 
+      wait(evtBlock[finalBlock1][i - 1] and evtBlock[finalBlock2][i - 1]);
+      compute DSortMerge(block[finalBlock1][i], 
+                         block[finalBlock2][i], 
+                         block[finalBlock1][i - 1], 
+                         block[finalBlock2][i - 1]);
+      notify(evtBlock[finalBlock1][i], evtBlock[finalBlock2][i]);
+    enddo
+  enddo
+endpar
+</graph>
+</application>

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<component type="abstract" name="add">
+<params>
+<param name="A" type="Matrix" mode="in" />
+<param name="B" type="Matrix" mode="in" />
+<param name="C" type="Matrix" mode="inout" />
+</params>
+</component>
+
