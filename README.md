@@ -343,11 +343,11 @@ blockCount = 4 blocks.
 
 	<?xml version="1.0"?>
 	<component type="abstract" name="DSortGenerator" description="Create a block of random integer" >
-	    <params>
-	        <param name="block" type="VectorInteger" mode="out" />
-	        <param name="size"  type="integer" mode="in" />
-	        <param name="max"   type="real" mode="in" />
-	    </params>
+		<params>
+		    <param name="block" type="VectorInteger" mode="out" />
+		    <param name="size"  type="integer" mode="in" />
+		    <param name="max"   type="real" mode="in" />
+		</params>
 	</component>
 
 - DSortSort.query
