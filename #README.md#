@@ -1,9 +1,10 @@
-# Yml Specification
+# YML Specification
 
-YML is a research project that aims at providing tools for using global computing middleware such as GRID, Peer to Peer and metacomputing environment. YML software architecture enables the definition of parallel application independently of the underlying middleware used. Parallel applications are defined using a workflow language called YvetteML. You can find more information in [YML offical site](http://yml.prism.uvsq.fr/index.php?lang=fr&page=0).
+YML is a research project that aims at providing tools for using global computing middleware such as GRID, Peer to Peer and metacomputing environment. YML software architecture enables the definition of parallel application independently of the underlying middleware used. Parallel applications are defined using a workflow language called YvetteML. You can find more information in the site http://yml.prism.uvsq.fr/index.php?lang=en&page=0.
 
-##TUTORIAL 1: First application                 
-
+----------------------------------------------------------------------
+--                   TUTORIAL 1: First application                  --
+----------------------------------------------------------------------
 Follow the tutorial and the TODO points.
 
 This is a short tutorial to help you getting started with YML.  It
@@ -29,8 +30,7 @@ When working with YML you will always follow this simple workflow:
 Let's start with the study of the definition of an abstract
 component. The query bellow stored in a file named abstract/test.query
 contains the definition of the only component we will use.
-
-
+----------------------------------------------------------------------
   <?xml version="1.0"?>
   <component type="abstract" name="test"
          description="This component sums two double and stores the result in res">
@@ -41,18 +41,21 @@ contains the definition of the only component we will use.
       </params>
   </component>
 
+----------------------------------------------------------------------
+
 To register an abstract component, one have to use
 yml_component. using the following command (TODO):
 
 $> yml_component abstract/test.query
 
-####TODO
-
-- Complete the .xml file in abstract/
-- Register the abstract component
+###
+# TODO
+# Complete the .xml file in abstract/
+# Register the abstract component
+###
 
 The file impl/test_impl.query contains the following :
-
+----------------------------------------------------------------------
 <?xml version="1.0" ?>
 <component name="test_impl" abstract="test" type="impl">
     <impl lang="CXX" libs="">
@@ -63,7 +66,7 @@ The file impl/test_impl.query contains the following :
         <footer></footer>
     </impl>
 </component>
-
+----------------------------------------------------------------------
 An implementation component is used to describe the computation
 executed remotely. It's compiled in a static binary application
 integrating communication mechanism required by YML.
@@ -76,26 +79,23 @@ your previously registered component just add the --force option in that
 way:
 $> yml_component --force impl/test_impl.query
 
+###
+# TODO
+# Complete the .xml file in impl/
+# Build the component with the component generator
+###
 
-####TODO
-
-- Complete the .xml file in impl/
-
-- Build the component with the component generator
-
-
-####TODO
-
-- List files which are in $PREFIX/var/yml/DefaultDevelopmentCatalog/
-
-- Open and read .xml files.
-
+###
+# TODO
+# List files which are in $PREFIX/var/yml/DefaultDevelopmentCatalog/
+# Open and read .xml files.
+###
 
 Finally the latest query we need is the application query which
 describe the graph to be executed. In this example we will make two
 sequential sum. The application is described in the file
 apps/test1.query.
-
+----------------------------------------------------------------------
   <application name="test1">
     <description>A starter example of an YML application</description>
     <params>
@@ -104,48 +104,44 @@ apps/test1.query.
         compute test(result, 1.0, 2.0);       # result contains 3.0
         compute test(result, result, result); # result contains 6.0
     </graph>
- </application>
-
+</application>
+----------------------------------------------------------------------
 one can compile this application using
 
 $> yml_compiler test1.query
 
 A file test1.query.yapp is generated.
 
-
-####TODO
-
-- Compile this application.
-
-- List files which are in $PREFIX/var/yml/dr/binaries
-
-- Open and read .cc files.
+###
+# TODO
+# Compile this application.
+# List files which are in $PREFIX/var/yml/dr/binaries
+# Open and read .cc files.
+###
 
 This operation generate a file test1.query.yapp containing an
 application ready to be executed by the scheduler:
 
 $> yml_scheduler test1.query.yapp
 
-
-####TODO
-
-- Execute this application.
-
-- Read and note the information about the execution (such as
-the number of tasks).
-
+###
+# TODO
+# Execute this application.
+# Read and note the information about the execution (such as
+# the number of tasks).
+###
 This command will create a folder named runXXX where XXX represent an
 integer. this folder contains all information related to an execution
 of an application. This include the graph, and some other information.
 
+###
+# TODO
+# In particular you can look at the content of the runXXX/exec_log
+# which provide a list of the component call or task executed on the
+# underlying middleware.
+###
 
-####TODO
-
-- In particular you can look at the content of the runXXX/exec_log
-which provide a list of the component call or task executed on the
-underlying middleware.
-
-- This command also create a runXXX_results.pack
+This command also create a runXXX_results.pack
 file which contains the output parameter of the application. This file
 can be inspected using the yml_parameter tool. However this does not
 give any result for now on because the application does not define any
@@ -153,6 +149,7 @@ parameters.
 
 In order to illustrate this tool we will update our application
 definition a little in order to add parameters.
+----------------------------------------------------------------------
   <application name="test2">
     <description>
 A starter example of an YML application with parameter
@@ -167,6 +164,7 @@ A starter example of an YML application with parameter
         compute test(result, result, result);
     </grap>
  </application>
+----------------------------------------------------------------------
 
 This application now takes 2 input parameters v1 and v2 both reals. It
 create a real as a result called result. Let's compile this application
@@ -175,18 +173,17 @@ resulting file:
 
 $> yml_compiler --output=test2.yapp test2.query
 
+###
+# TODO
+# Add the parameters in the test2.query file.
+# Compile it.
+###
 
-####TODO
-
-- Add the parameters in the test2.query file.
-
-- Compile it.
-
-####TODO
-
-Now follow the tutorial on how to manipulate parameters with
-
-yml_parameter.
+###
+# TODO
+# Now follow the tutorial on how to manipulate parameters with
+# yml_parameter.
+###
 
 We can display parameter related application using yml_parameter tool
 
@@ -226,10 +223,10 @@ $> yml_scheduler --input=test2_input.pack test2.yapp
 You can see the value of result using :
 
 $> yml_parameter --app=test2.yapp --pack=runXXX_results.pack --extract=result
-
-
-## TUTORIAL 2: Distributed sort algorithm       
-
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+--                   TUTORIAL 2: Distributed sort algorithm         --
+----------------------------------------------------------------------
 Follow the tutorial and the TODO points.
 
 It is assumed that you have already followed tutorial 1 (../tutorial1-sum)
@@ -248,30 +245,29 @@ same sizes. The elements of block ai are all smaller than elements of block
 a_j. All outputs blocks are also sorted. The sort algorithm is described by
 algorithm 1.
 
-###Algorithm 1
-
+-------------------------------------------------------------------------
+- Algorithm 1
+-------------------------------------------------------------------------
 INPUTS: {a_1 , a_2 , . . . , a_n } N unsorted blocks of K integer values.
 OUTPUTS: {a_1 , a_2 , . . . , a_n } N sorted blocks of K integer values.
-
 for i in 1, blockCount in parallel do
     DSortBlock (INPUTS: ai OUTPUTS: ai )
-for iter in 1, blockCount âˆ’ 1 do
-    inc â† 1 + iter mod 2
-    for i in 0, blockCount/2 âˆ’ 1 in parallel do
-        block1 â† 1 + (inc + 2 âˆ— i) mod N
-        block2 â† 1 + (inc + 2 âˆ— i + 1) mod N
-        min â† min(block1, block2)
-        max â† max(block1, block2)
+for iter in 1, blockCount œôø² 1 do
+    inc œôöð 1 + iter mod 2
+    for i in 0, blockCount/2 œôø² 1 in parallel do
+        block1 œôöð 1 + (inc + 2 œôø· i) mod N
+        block2 œôöð 1 + (inc + 2 œôø· i + 1) mod N
+        min œôöð min(block1, block2)
+        max œôöð max(block1, block2)
         DSortMerge (INPUTS: a_min , a_max OUTPUTS: a_min , a_max )
+--------------------------------------------------------------------------
 
 2./ Conception of the application
 
 Parameters and services needed for the application are listed.
 
 It defines two parameters:
-
 - blockSize: defines the number of integers contained in each block.
-
 - blockCount: defines the number of blocks of blockSize integers. The size of
 the collection to sort is obtained by multiplying blockSize by blockCount.
 This parameter also determines the number of parallel operations which compose
@@ -279,11 +275,9 @@ its iteration of the algorithm.
 
 The 3 services are:
 - Generator: create a block of the collection composed of a random integers.
-
 - Sort: Sort the elements contained in a single block. This is only needed
 after the generation of a block because the merging operation expects input
 blocks to be sorted.
-
 - Merge: Merge two blocks as described before. The two blocks are merged so that
 the smallest elements are in the rst resulting block and the largest elements t in
 the second resulting block. The number remains sorted in both blocks
@@ -293,8 +287,9 @@ Figure 1 is a visual representation of the work of the application using
 blockCount = 4 blocks.
 
 
-###Figure 1 - Workflow of DSort application for blockCount = 4 blocks (Top -> Down)
-
+-----------------------------------------------------------------------------------
+- Figure 1 - Workflow of DSort application for blockCount = 4 blocks (Top -> Down)
+-----------------------------------------------------------------------------------
                         -------------------------
                         |        <Start>        |
                         -------------------------
@@ -333,13 +328,15 @@ blockCount = 4 blocks.
                                  --------
                                  |<Stop>|
                                  --------
+-------------------------------------------------------------------------
 
 3./ Implementation in YML
 
 3.1./ Abstract components
 
+----------------------------------------------------
 - DSortGenerator.query
-
+----------------------------------------------------
 <?xml version="1.0"?>
 <component type="abstract" name="DSortGenerator" description="Create a block of random integer" >
     <params>
@@ -348,9 +345,11 @@ blockCount = 4 blocks.
         <param name="max"   type="real" mode="in" />
     </params>
 </component>
+----------------------------------------------------
 
+----------------------------------------------------
 - DSortSort.query
-
+----------------------------------------------------
 <?xml version="1.0" ?>
 <component name="DSortSort" type="abstract" description="Sort a single block">
     <params>
@@ -359,18 +358,9 @@ blockCount = 4 blocks.
 </component>
 
 
+----------------------------------------------------
 - DSortMerge.query
-
-<?xml version="1.0" ?>
-<component name="DSortSort" type="abstract" description="Sort a single block">
-    <params>
-        <param name="block" type="VectorInteger" mode="inout" />
-    </params>
-</component>
-
-
-- DSortMerge.query
-
+----------------------------------------------------
 <?xml version="1.0"?>
 <component name="DSortMerge" type="abstract" description="Sort two sorted block
 and store all values in two block all value in b1Out are lower or equal to
@@ -382,27 +372,33 @@ the ones in b2Out" >
         <param name="b2In" type="VectorInteger" mode="in" />
     </params>
 </component>
+----------------------------------------------------
 
 3.2./ Implementation components
 
 See implementation of each component in ./impl
 
+----------------------------------------------------
 - DSortGenerator_impl.query
-
+----------------------------------------------------
+----------------------------------------------------
 - DSortSort_impl.query
-
+----------------------------------------------------
+------------------------------------------------------
 - DSortMerge_impl.query
+------------------------------------------------------
 
 3.3./ Graph
 
-####TODO
-
-- Complete the graph of this application in ./application/execution.query
-considering algorithm 1 and Figure 1.
-
+###
+# TODO
+# Complete the graph of this application in ./application/execution.query
+# considering algorithm 1 and Figure 1.
+###
+-------------------------------------------------------------------
 - execution.query
-
 - Implementation of Algorithm 1 (Complete the file execution.query)
+-------------------------------------------------------------------
 
 4./ Compilation and execution
 
@@ -417,9 +413,10 @@ Here, the .type.hh file is written in ./types.
 Then, ./types/*.type.hh should be copyied in $PREFIX/var/yml/DefaultExecutionCatalog/generators/CXX/include/
 Read cxx_include.README for information about type definition.
 
-####TODO
-
-- Register components, and compile the application using
-the command yml_component, yml_compiler, yml_parameter
-(to pass blockSize), yml_scheduler
-as described in tutorial1-sum.
+###
+# TODO
+# Register components, and compile the application using
+# the command yml_component, yml_compiler, yml_parameter
+# (to pass blockSize), yml_scheduler
+# as described in tutorial1-sum.
+###
