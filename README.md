@@ -342,7 +342,7 @@ blockCount = 4 blocks.
 
 - DSortGenerator.query
 
-The codes:
+The codes creat DSortGenerator as follows:
 
 	<?xml version="1.0"?>
 	<component type="abstract" name="DSortGenerator" description="Create a block of random integer" >
@@ -356,15 +356,7 @@ The codes:
 
 - DSortSort.query
 
-	<?xml version="1.0" ?>
-	<component name="DSortSort" type="abstract" description="Sort a single block">
-	    <params>
-	        <param name="block" type="VectorInteger" mode="inout" />
-	    </params>
-	</component>
-
-
-- DSortMerge.query
+The codes creat DSortSort as follows:
 
 	<?xml version="1.0" ?>
 	<component name="DSortSort" type="abstract" description="Sort a single block">
@@ -375,6 +367,8 @@ The codes:
 
 
 - DSortMerge.query
+
+The codes creat DSortMerge as follows:
 
 	<?xml version="1.0"?>
 	<component name="DSortMerge" type="abstract" description="Sort two sorted block
