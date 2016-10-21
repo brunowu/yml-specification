@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<application name="DSORT2" >
+    <description>
+        This graph is used for performance mesurements. It manage one copy of each block 
+        and can be use for huge data set. 
+    </description>
+<params>
+    <param name="blockSize" type="integer" mode="in" />  
+    <param name="block" type="VectorInteger" collection="yes" mode="out" />
+</params>
+<graph>
+# Change this variable value to a power of two to scale the 
+# number of task in an application 
+
+blockCount := 32;
+par 
+  par (i := 1; blockCount) 
+  do 
+    compute DSortGenerator(block[i], blockSize, 256.0);
+    compute DSortSort(block[i]);
+    notify(evtBlock[i][0]);
+  enddo
+//
+  par (i := 1; blockCount - 1) 
+  do 
+    inc := 1 + (i % 2); 
+    par (j := 0 ; blockCount / 2 - 1) 
+    do 
+      block1 := ( inc + 2*j ) % blockCount;
+      block2 := ( inc + 2*j + 1 ) %  blockCount;
+      if (block1 gt block2)
+      then 
+        finalBlock1 := 1 + block2;
+        finalBlock2 := 1 + block1;
+      else
+        finalBlock1 := 1 + block1;
+        finalBlock2 := 1 + block2;
+      endif 
+      wait(evtBlock[finalBlock1][i - 1] and evtBlock[finalBlock2][i - 1]);
+      compute DSortMerge(block[finalBlock1], 
+                         block[finalBlock2], 
+                         block[finalBlock1], 
+                         block[finalBlock2]);
+      notify(evtBlock[finalBlock1][i], evtBlock[finalBlock2][i]);
+    enddo
+  enddo
+endpar
+</graph>
+</application>

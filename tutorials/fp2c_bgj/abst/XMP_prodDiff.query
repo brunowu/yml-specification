@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<component type="abstract" name="XMP_prodDiff" description="Compute a matrix minus the product of two matrixes C0=C0-(B0xA0)" >
+<params>
+<param name="B0" type="Matrix" mode="in" />
+<param name="A0" type="Matrix" mode="in" />
+<param name="C0" type="Matrix" mode="inout" />
+</params>
+</component>
+

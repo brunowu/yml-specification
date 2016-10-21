@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<component name="DSortSort_Impl" type="impl" abstract="DSortSort">
+    <impl lang="CXX">
+        <header>
+<![CDATA[
+#include <algorithm> 
+]]>
+        </header>
+        <source>
+std::sort(block.begin(), block.end());
+        </source>
+        <footer />
+    </impl>
+</component>

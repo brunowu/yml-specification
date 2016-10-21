@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<component type="abstract" name="XMP_disp"> 
+<params>
+<param name="A" type="Matrix" mode="in" />
+</params>
+</component>
+

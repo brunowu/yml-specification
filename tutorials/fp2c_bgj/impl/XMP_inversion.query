@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<component type="impl" name="XMP_inversion" abstract="XMP_inversion">
+<impl lang="XMP" nodes="CPU:(4,1)">
+  <templates>
+    <template name="u" format="block,block" size="64,64" />
+  </templates>
+  <distribute>
+    <param template="u" name="matInput(64,64)" align="[i][j]:(i,j)" />
+    <param template="u" name="matInv(64,64)"   align="[i][j]:(i,j)" />
+  </distribute>
+<header>
+<![CDATA[
+  double matInput2[64];
+]]>
+</header>
+<source>
+<![CDATA[
+  int    i, j, k, n;
+  double temp;
+
+  n = 64;
+#pragma xmp loop (j,i) on u(i,j)
+  for(i=0;i<n;i++){
+    for(j=0;j<n;j++){
+      if(i==j)
+        matInv[i][j]=1.0;
+      else
+        matInv[i][j]=0;
+    }
+  }
+
+  // k indicates column like fortran :-P
+  for(k=0;k<n;k++){
+    temp=0.0;
+#pragma xmp task on u(k,1)
+    {
+      temp=matInput[k][k];
+    }
+#pragma xmp reduction(+:temp)
+
+    // let (k,k) one
+#pragma xmp loop (i) on u(i,j)
+    for(i=0;i<n;i++){
+      matInput[i][k]=matInput[i][k]/temp;
+      matInv[i][k]  =matInv[i][k]/temp;
+    }
+
+    // let (0,k) (1,k) ... (n,k) zero
+    for(j=0;j<n;j++){
+      matInput2[j]=0;
+    }
+#pragma xmp task on u(k,1)
+    {
+      for(j=0;j<n;j++){
+        matInput2[j]=matInput[k][j];
+      }
+    }
+#pragma xmp reduction(+:matInput2)
+
+#pragma xmp loop (i,j) on u(i,j)
+    for(i=0;i<n;i++){
+      for(j=0;j<n;j++){
+        if(k!=j){
+          matInv[i][j]  -=matInv[i][k]*matInput2[j];
+          matInput[i][j]-=matInput[i][k]*matInput2[j];
+        }
+      }
+    }
+  }// k
+]]>
+</source>
+<footer />
+</impl>
+</component>
+

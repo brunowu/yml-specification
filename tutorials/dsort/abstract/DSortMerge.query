@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<component name="DSortMerge" type="abstract" description="Sort two sorted block and store all values in two block all value in b1Out are lower or equal to the ones in b2Out" >
+    <params>
+        <param name="b1Out" type="VectorInteger" mode="out" />
+        <param name="b2Out" type="VectorInteger" mode="out" />
+        <param name="b1In" type="VectorInteger" mode="in" />
+        <param name="b2In" type="VectorInteger" mode="in" />
+    </params>
+</component>

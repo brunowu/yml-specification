@@ -1,0 +1,1 @@
+This folder contains a distributed sort application example. This is a nice example of parallelism express using YML to represent a set of parallel loop with explicit synchronisation. 

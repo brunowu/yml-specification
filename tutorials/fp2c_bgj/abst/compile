@@ -1,0 +1,4 @@
+for i in `ls *.query`
+do
+yml_component --force $i
+done

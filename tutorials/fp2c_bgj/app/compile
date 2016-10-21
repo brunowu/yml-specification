@@ -1,0 +1,11 @@
+for i in `ls *.query`
+do
+yml_compiler $i
+done
+
+omrpc-register-yml *yapp | grep ^gauss > stubs
+cp stubs  ~/.omrpc_registry
+cp hosts ~/.omrpc_registry/nodes
+#cp mpi.xcf ../../etc/yml/
+#cat stubs
+#echo "mpirun -n 1 -machinefile ./hosts yml_scheduler gaussJordan.query.yapp"

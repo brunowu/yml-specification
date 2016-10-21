@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<application name="test">
+<graph>
+
+n:=2;
+par
+  par(i:=0;n-1)
+  do
+    compute init(A[i],B[i],C[i]);
+    notify(init[i]);
+  enddo
+//
+  par(i:=0;n-1)
+  do
+    wait(init[i]);
+    compute add(A[i],B[i],C[i]);
+  enddo
+endpar
+
+</graph>
+</application>

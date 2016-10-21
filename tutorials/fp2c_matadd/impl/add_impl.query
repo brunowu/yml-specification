@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<component type="impl" name="add" abstract="add">
+<impl lang="XMP" nodes="CPU:(2,2)">
+<templates>
+<template name="t" format="block,block" size="8,8"/>
+</templates>
+<distribute>
+<param template="t" name="A(8,8)" align="[i][j]:(j,i)"/>
+<param template="t" name="B(8,8)" align="[i][j]:(j,i)"/>
+<param template="t" name="C(8,8)" align="[i][j]:(j,i)"/>
+</distribute>		
+<header>
+<![CDATA[
+#include<xmp.h>
+]]>
+</header>
+<source>
+<![CDATA[
+  int myrank,nprocs;
+  int i,j,n;
+  n=8;
+
+#pragma xmp loop (j,i) on t(j,i)
+  for(i=0;i<n;i++){
+    for(j=0;j<n;j++){
+      C[i][j]=A[i][j]+B[i][j];
+    }
+  }
+
+]]>
+</source>
+</impl>
+</component>
+

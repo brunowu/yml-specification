@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<component type="impl" name="DSortGenerator_Impl" abstract="DSortGenerator">
+    <impl lang="CXX">
+        <header>
+            <![CDATA[
+#include <cstdlib>
+#include <time.h>
+#include <unistd.h>    
+        ]]>
+        </header>
+        <source>
+        <![CDATA[
+srand(time(0) + getpid());  
+for(yml::integer i = 0 ; i < size ; ++i)
+{
+  int j = rand() % (int)max;
+  block.push_back(j);
+}
+]]>
+        </source>
+        <footer />
+    </impl>
+</component>

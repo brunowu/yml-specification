@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<component name="DSortMerge_Impl" type="impl" abstract="DSortMerge">
+    <impl lang="CXX">
+        <header><![CDATA[#include <cstdlib>]]></header>
+        <source><![CDATA[
+yml::VectorInteger* filler = &b1Out;
+yml::VectorInteger::iterator iter1, iter2;
+iter1 = b1In.begin();
+iter2 = b2In.begin();
+while(iter1 != b1In.end() || iter2 != b2In.end())
+{
+  if (filler->size() == b1In.size())
+  {
+      filler = &b2Out;
+  }
+  if (iter1 != b1In.end())
+  {
+    if (iter2 != b2In.end())
+    {
+      if (*iter1 < *iter2)
+      {
+          filler->push_back(*iter1);
+          ++iter1;
+      }
+      else 
+      {
+          filler->push_back(*iter2);
+          ++iter2;
+      }
+    }
+    else 
+    {
+        filler->push_back(*iter1);
+        ++iter1;
+    }
+  }
+  else 
+  {
+      filler->push_back(*iter2);
+      ++iter2;
+  }
+}
+
+]]></source>
+        <footer />
+    </impl>
+</component> 

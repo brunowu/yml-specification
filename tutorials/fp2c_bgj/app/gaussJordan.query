@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<application name="Gauss-Jordan">
+<graph>
+
+  blockcount:=4;
+
+par
+  par(i:=0;blockcount-1)(j:=0;blockcount-1) 
+  do
+    compute XMP_genMat(A[i][j],i,j);    
+    compute XMP_copyMat(A[i][j],C[i][j]);
+  enddo
+//
+  par(i:=0;blockcount-1)(j:=0;blockcount-1)
+  do
+    if (i neq j) then
+      compute XMP_fillMatrixZero(B[i][j]);
+    endif
+  enddo
+endpar
+
+par(k:=0;blockcount-1)
+do
+  par
+    #step 0
+
+    #inversion
+    if (k neq 0) then 
+      wait(prodDiffA[k][k][k-1]);
+    endif
+
+    compute XMP_inversion(A[k][k],B[k][k]);
+    notify(bInversed[k][k]);
+//
+    if (k neq blockcount-1) then 
+      par (i:=k+1; blockcount-1)
+      do
+        wait(bInversed[k][k]);
+        compute XMP_prodMat(B[k][k],A[k][i]);
+        notify(prodA[k][i]);
+      enddo
+    endif		
+//
+    wait(bInversed[k][k]);
+    par(i:=0;blockcount-1)			
+    do
+      if(i neq k) then 
+        compute XMP_mProdMat(A[i][k],B[k][k],B[i][k]);
+        notify(mProdB[k][i][k]);
+      endif
+      if(k gt i) then
+        compute XMP_prodMat(B[k][k],B[k][i]);
+        notify(prodB[k][i]);
+      endif
+    enddo
+//
+    par(i:= 0;blockcount-1)
+    do
+      if (i neq k) then
+        if (k neq blockcount - 1) then	
+	  par (j:=k + 1;blockcount - 1) 
+	  do 
+	    wait(prodA[k][j]);
+	    compute XMP_prodDiff(A[i][k],A[k][j],A[i][j]);
+	    notify(prodDiffA[i][j][k]);
+          enddo
+        endif
+        #ok
+
+        if (k neq 0) then		
+          par(j:=0;k - 1)
+          do
+            wait(prodB[k][j]);
+            compute XMP_prodDiff(A[i][k],B[k][j],B[i][j]);				
+          enddo
+        endif
+      endif
+    enddo
+
+endpar
+enddo
+
+</graph>
+</application>
+
+
